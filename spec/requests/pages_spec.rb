@@ -28,4 +28,5 @@ describe "Pages" do
 		it { should have_title(correct_title('Contact')) }
 	end
 
+	
 end
