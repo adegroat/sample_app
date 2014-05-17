@@ -1,11 +1,16 @@
 <div id="header">
-	<div class="navbar navbar-fixed-top navbar-inverse">
-		<div class="nav pull-right">
-			<ul>
+	<div class="navbar navbar-static-top navbar-inverse">
+
+		<div class="navbar-inner">
+
+			<%= link_to "Sample App", root_path, id: "logo" %>
+
+			<ul class="nav pull-right">
 				<li><%= link_to 'Home', root_path %></li>
 				<li><%= link_to 'Sign up', '#' %></li>
 				<li><%= link_to 'Sign in', '#' %></li>
 			</ul>
 		</div>
+
 	</div>
 </div>
