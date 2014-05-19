@@ -33,7 +33,7 @@ describe User do
 
 	describe "when email is invalid" do
 		it "should be invalid" do
-			emails = ["test@mail", "monkyrubeATgmail.com", "email"]
+			emails = ["test@mail", "monkyrubeATgmail.com", "email", "bob@mail..com"]
 			emails.each do |invalid_email|
 				@user.email = invalid_email
 				expect(@user).not_to be_valid
