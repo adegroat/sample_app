@@ -1,6 +1,33 @@
 <%= provide(:title, 'Sign up') %>
 
 <div>
-	<h1>Sign up</h1>
+	<h1 class="center">Sign up</h1>
 
+	<% if @user.errors.any? %>
+		<div class="row">
+			<div class="error_box span6 offset3">
+				<p class="error_message center">
+					<%= @user.errors.full_messages[0] %>
+				</p>
+			</div>
+		</div>
+	<% end %>
+
+	<div class="row">
+		<div class="span4 offset4">
+			<%= form_for(@user, html: { class: "signup_form" }) do |f| %>
+
+				<%= f.text_field :name, placeholder: "Name" %>
+
+				<%= f.text_field :email, placeholder: "Email" %>
+
+				<%= f.password_field :password, placeholder: "Password" %>
+
+				<%= f.password_field :password_confirmation, placeholder: "Confirm password" %>
+
+				<%= f.submit "Sign up", class: "btn btn-success" %>
+
+			<% end %>
+		</div>
+	</div>
 </div>
