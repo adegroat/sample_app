@@ -8,16 +8,16 @@ class UsersController < ApplicationController
 		@user = User.new(user_params())
 
 		if @user.save
-			render 'pages/home.html.erb'			
+			#render('pages/home.html.erb')
+			redirect_to(@user)
 		else
-			render 'new'
+			render('new')
 		end
 
 	end
 
 	def show
 		@user = User.find(params[:id])
-		
 	end
 
 	private 
