@@ -57,3 +57,21 @@
 	}
 
 }
+
+.flash {
+	padding: 5px;
+	margin: 10px 0 10px 0;
+	border-radius: 3px;
+}
+
+.flash-error {
+	border: solid 1px red;
+	color: red;
+	background: #FCDEDE;
+}
+
+.flash-success {
+	border: solid 1px #00B822;
+	color: #00B822;
+	background: #DEFCDE;
+}

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params())
 
 		if @user.save
-			#render('pages/home.html.erb')
+			flash[:success] = "Thank you for signing up!"
 			redirect_to(@user)
 		else
 			render('new')
