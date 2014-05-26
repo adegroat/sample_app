@@ -5,8 +5,8 @@
 
 	<% if @user.errors.any? %>
 		<div class="row">
-			<div class="error_box span6 offset3">
-				<p class="error_message center">
+			<div class="span6 offset3">
+				<p class="alert alert-error center">
 					<%= @user.errors.full_messages[0] %>
 				</p>
 			</div>
