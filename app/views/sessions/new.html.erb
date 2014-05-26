@@ -13,7 +13,9 @@
 		<%= form_for(:session, url: sessions_path, html: { class: "signin_form" }) do |f| %>
 	
 			<%= f.text_field(:email, placeholder: "Email") %>
+			
 			<%= f.password_field(:password, placeholder: "Password") %>
+			
 			<%= f.submit("Sign in", class: "btn btn-success") %>
 
 		<% end %>

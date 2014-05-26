@@ -40,8 +40,6 @@ describe "User pages" do
 
 		it { should have_selector('h1', text: user.name) }
 		it { should have_title(correct_title(user.name)) }
-
-		
 	end
 
 end

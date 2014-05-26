@@ -11,7 +11,7 @@ describe "Authentication" do
 	end
 
 	describe "signing in" do
-		before { visit(signin_path()) }
+		before { visit(signin_path) }
 
 		describe "with invalid info" do
 			before { click_button('Sign in') }
@@ -24,7 +24,7 @@ describe "Authentication" do
 			before do
 				fill_in("Email", with: user.email.upcase)
 				fill_in("Password", with: user.password)
-				click_button('Sign in')
+				click_button("Sign in")
 			end
 
 			it { should have_title(correct_title(user.name)) }
@@ -32,7 +32,6 @@ describe "Authentication" do
 			it { should have_link('Sign out', href: signout_path) }
 			it { should_not have_link('Sign in', href: signin_path) }
 			it { should_not have_link('Sign up', href: signup_path) }
-
 		end
 
 	end
