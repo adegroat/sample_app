@@ -27,7 +27,7 @@ describe "User pages" do
 				fill_in("Password", with: "monkey123")
 				fill_in("Confirm password", with: "monkey123")
 
-				expect {click_button(signup)}.to change(User, :count).by(1)
+				expect { click_button(signup) }.to change(User, :count).by(1)
 
 			end
 		end
