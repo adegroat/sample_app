@@ -2,6 +2,11 @@ class UsersController < ApplicationController
 
 	def new
 		@user = User.new
+
+		if signed_in?
+			redirect_to(current_user, notice: "You already have an account.")
+		end
+
 	end
 
 	def create
@@ -21,7 +26,7 @@ class UsersController < ApplicationController
 		@user = User.find_by(id: params[:id])
 	end
 
-	private 
+private 
 
 	def user_params
 		params.require(:user).permit(:name, :email, :password, :password_confirmation)
