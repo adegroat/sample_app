@@ -55,7 +55,7 @@ describe "User pages" do
 		describe "with invalid info" do
 			before { click_button('Update') }
 
-			it { should have_selector('alert.alert-error', text: 'Error') }
+			it { should have_selector('p.alert.alert-error') }
 		end
 
 	end
