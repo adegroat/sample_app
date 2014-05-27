@@ -21,11 +21,7 @@ describe "Authentication" do
 
 		describe "with valid info" do
 			let(:user) { FactoryGirl.create(:user) }
-			before do
-				fill_in("Email", with: user.email.upcase)
-				fill_in("Password", with: user.password)
-				click_button('Sign in')
-			end
+			before { cb_sign_in(user) }
 
 			it { should have_title(correct_title(user.name)) }
 			it { should have_link('Profile', href: user_path(user)) }
@@ -34,7 +30,55 @@ describe "Authentication" do
 			it { should_not have_link('Sign in', href: signin_path) }
 			it { should_not have_link('Sign up', href: signup_path) }
 		end
+	end
+
+	describe "non signed in users in the Users controller" do
+
+		let(:user) { FactoryGirl.create(:user) }
+
+		describe "visiting the edit page" do
+			before { visit(edit_user_path(user)) }
+			it { should have_title(correct_title('Sign in')) }
+		end
+
+		describe "submitting to the update action" do
+			before { patch user_path(user) }
+			specify { expect(response).to redirect_to(signin_path) }
+		end
+
+		describe "when attempting to visit a protected page" do
+			before do
+				visit(edit_user_path(user))
+				cb_sign_in(user)
+			end
+
+			describe "after successfully signing in" do
+				it "should render the desired protected page" do
+					expect(page).to have_title("Updare profile")
+				end
+			end
+
+		end
 
 	end
+
+	describe "editing a profile that's not yours" do
+		let(:user) { FactoryGirl.create(:user) }
+		let(:another_user) { FactoryGirl.create(:user, email: "another.user@mail.com") }
+
+		before { sign_in(user) }
+
+		describe "GET request to Users#edit action" do
+			before { get edit_user_path(another_user) }
+			specify { expect(response).to redirect_to(root_path) }
+		end
+
+		describe "PATCH request to Users#update action" do
+			before { patch user_path(another_user) }
+			specify { expect(response).to redirect_to(root_path) }
+		end
+
+	end
+
 
 end
