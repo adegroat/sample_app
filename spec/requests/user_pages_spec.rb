@@ -73,6 +73,7 @@ describe "User pages" do
 				click_button("Update")
 			end
 
+			it { should have_selector("div.alert.alert-success") }
 			it { should have_selector('h1', text: new_name) }
 			it { should have_title(correct_title(new_name)) }
 
