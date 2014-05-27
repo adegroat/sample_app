@@ -54,7 +54,7 @@ describe "Authentication" do
 
 			describe "after successfully signing in" do
 				it "should render the desired protected page" do
-					expect(page).to have_title("Updare profile")
+					expect(page).to have_title("Update profile")
 				end
 			end
 
