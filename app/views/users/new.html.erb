@@ -3,15 +3,7 @@
 <div>
 	<h1 class="center">Sign up</h1>
 
-	<% if @user.errors.any? %>
-		<div class="row">
-			<div class="span6 offset3">
-				<p class="alert alert-error center">
-					<%= @user.errors.full_messages[0] %>
-				</p>
-			</div>
-		</div>
-	<% end %>
+	<%= render 'shared/error_messages', object: @user %>
 
 	<div class="row">
 		<div class="span4 offset4">

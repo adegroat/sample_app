@@ -1,0 +1,9 @@
+<% if object.errors.any? %>
+	<div class="row">
+		<div class="span6 offset3">
+			<p class="alert alert-error center">
+				<%= object.errors.full_messages[0] %>
+			</p>
+		</div>
+	</div>
+<% end %>
