@@ -32,10 +32,12 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
-		if @user.update_attributes(user_params)
-			# Success
+
+		if @user.update_attributes(user_params())
+			flash[:success] = "Your pofile has been updated!"
+			redirect_to(@user)
 		else
-			render 'edit'
+			render ('edit')
 		end
 	end
 
