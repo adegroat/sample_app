@@ -42,4 +42,22 @@ describe "User pages" do
 		it { should have_title(correct_title(user.name)) }
 	end
 
+	describe "edit" do
+		let(:user) { FactoryGirl.create(:user) }
+		before { visit edit_user_path(user) }
+
+		describe "page" do
+			it { should have_content("Update your profile") }
+			it { should have_title(correct_title("Update profile")) }
+			it { should have_link('Change', href: 'http://gravatar.com/emails') }
+		end
+
+		describe "with invalid info" do
+			before { click_button('Update') }
+
+			it { should have_selector('alert.alert-error', text: 'Error') }
+		end
+
+	end
+
 end
