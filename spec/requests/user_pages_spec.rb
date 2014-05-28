@@ -32,6 +32,22 @@ describe "User pages" do
 			end
 		end
 
+		describe "while already signed in" do
+			let(:user) { FactoryGirl.create(:user) }
+			before { sign_in(user) }
+
+			describe "submitting a GET request" do
+				before { get signup_path }
+				specify { expect(response).to redirect_to(user) }
+			end
+
+			describe "submitting a POST request" do
+				before { post '/users' }
+				specify { expect(response).to redirect_to(user) }
+			end
+
+		end
+
 	end
 
 	describe "profile page" do

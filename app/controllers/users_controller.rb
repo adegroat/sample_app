@@ -2,12 +2,9 @@ class UsersController < ApplicationController
 
 	before_action(:signed_in_user, only: [:edit, :update])
 	before_action(:correct_user, only: [:edit, :update])
+	before_action(:already_have_account, only: [:new, :create])
 
 	def new
-		if signed_in?
-			redirect_to(current_user, notice: "You already have an account.")
-		end
-
 		@user = User.new
 	end
 
@@ -56,6 +53,10 @@ private
 	def correct_user
 		@user = User.find(params[:id])
 		redirect_to(root_path) unless current_user == @user
+	end
+
+	def already_have_account
+		redirect_to(current_user) if signed_in?
 	end
 
 end
