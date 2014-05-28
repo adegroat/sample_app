@@ -96,4 +96,24 @@ describe "User pages" do
 		end
 	end
 
+	describe "index" do
+		before do
+			cb_sign_in(FactoryGirl.create(:user))
+			15.times { FactoryGirl.create(:user) }
+			visit(users_path)
+		end
+
+		it { should have_title(correct_title("All Users")) }
+		it { should have_content("All Users") }
+
+		it { should have_selector("div.pagination") }
+
+		it "should list each user" do
+			User.paginate(page: 1, per_page: 15).each do |user|
+				expect(page).to have_link(user.name, href: user_path(user))
+			end
+		end
+
+	end
+
 end
