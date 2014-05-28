@@ -12,8 +12,10 @@ describe User do
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:remember_token) }
 	it { should respond_to(:authenticate) }
+	it { should respond_to(:admin) }
 
 	it { should be_valid }
+	it { should_not be_admin }
 
 
 	describe "when name is not present" do
@@ -62,14 +64,7 @@ describe User do
 	end
 
 
-	describe "when password is not present" do
-		#before { @user = User.new(name: "TestUser", email: "test@mail.com", password: "", password_confirmation: "") } # Why not do it the ways below?
-		
-		# before do
-		# 	@user.password = ""
-		# 	@user.password_confirmation = ""
-		# end
-		
+	describe "when password is not present" do		
 		before { @user.password = @user.password_confirmation = "" }
 		it { should_not be_valid }
 	end
@@ -103,4 +98,13 @@ describe User do
 		before { @user.save }
 		its (:remember_token) { should_not be_blank }
 	end
+
+	describe "with admin status" do
+		before do
+			@user.save!
+			@user.toggle(:admin)
+		end
+		it { should be_admin }
+	end
+
 end

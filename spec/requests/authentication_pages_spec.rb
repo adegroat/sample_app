@@ -82,7 +82,16 @@ describe "Authentication" do
 			before { patch user_path(another_user) }
 			specify { expect(response).to redirect_to(root_path) }
 		end
+	end
 
+	describe "as a non admin user" do
+		let(:user) { FactoryGirl.create(:user) }
+		before { sign_in(user) }
+
+		describe "submitting a DELETE request to Users#destroy" do
+			before { delete user_path(user) }
+			specify { expect(response).to redirect_to(root_path) }
+		end
 	end
 
 

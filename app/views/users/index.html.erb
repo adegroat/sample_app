@@ -9,6 +9,13 @@
 		<li>
 			<%= gravatar_for(user) %>
 			<%= link_to(user.name, user) %>
+
+			<% if current_user.admin? && user != current_user %>
+				<p class="pull-right">
+					<%= link_to("Delete", user, method: :delete, data: { confirm: "Are you sure?" }) %>
+				</p>
+			<% end %>
+
 		</li>
 	<% end %>
 
