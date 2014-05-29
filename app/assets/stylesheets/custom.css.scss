@@ -80,3 +80,22 @@
 	    }
 	}
 }
+
+.microposts {
+	list-style: none;
+
+	li {
+		padding: 5px;
+		border-bottom: solid 1px $grayLighter;
+
+		.content {
+			display: block;
+		}
+
+		.timestamp {
+			font-size: 0.9em;
+			color: $grayLight;
+		}
+
+	}
+}
