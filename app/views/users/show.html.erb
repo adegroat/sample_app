@@ -11,7 +11,7 @@
 
 	<div class="span8">
 		<% if @user.microposts.any? %>
-		<h3><%= @user.microposts.count %> Microposts</h3>
+		<h3><%= pluralize(@user.microposts.count, "Micropost") %></h3>
 			<ol class="microposts">
 				<%= render @microposts %>
 			</ol>
