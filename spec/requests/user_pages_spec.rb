@@ -57,7 +57,7 @@ describe "User pages" do
 
 		before { visit user_path(user) }
 
-		it { should have_selector('h1', text: user.name) }
+		it { should have_content(user.name) }
 		it { should have_title(correct_title(user.name)) }
 
 		describe "microposts" do
@@ -99,7 +99,7 @@ describe "User pages" do
 			end
 
 			it { should have_selector("div.alert.alert-success") }
-			it { should have_selector('h1', text: new_name) }
+			it { should have_content(new_name) }
 			it { should have_title(correct_title(new_name)) }
 
 		end

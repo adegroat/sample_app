@@ -8,6 +8,24 @@ describe "Pages" do
 		before { visit(root_path) }
 		it { should have_content('Welcome') }
 		it { should have_title(correct_title('Home')) }
+
+		describe "for signed in users" do
+			let(:user) { FactoryGirl.create(:user) }
+			before do
+				FactoryGirl.create(:micropost, user: user, content: "test post 1")
+				FactoryGirl.create(:micropost, user: user, content: "test micropost 2")
+				cb_sign_in(user)
+				visit(root_path)
+			end
+
+			it "should have the user's feed" do
+				user.feed.each do |f|
+					expect(page).to have_selector("li##{f.id}", text: f.content)
+				end
+			end
+
+		end
+
 	end
 
 	describe "Help page" do

@@ -2,6 +2,7 @@ SampleApp::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :microposts, only: [:create, :destroy]
   root 'pages#home'
   match '/home', to: 'pages#home', via: 'get'
   match '/help', to: 'pages#help', via: 'get'

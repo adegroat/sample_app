@@ -1,0 +1,10 @@
+<div class="row" style="margin-bottom:20px">
+	<span class="span1">
+		<%= link_to gravatar_for(current_user), current_user, title: "View profile" %>
+	</span>
+
+	<span class="span 11">
+		<h2 style="margin: 0;"><%= current_user.name %></h2>
+		<%= pluralize(current_user.microposts.count, "Microposts") %>
+	</span>
+</div>

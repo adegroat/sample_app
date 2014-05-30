@@ -33,36 +33,50 @@ describe "Authentication" do
 		end
 	end
 
-	describe "non signed in users in the Users controller" do
+	describe "non signed in users" do
 
 		let(:user) { FactoryGirl.create(:user) }
 
-		describe "visiting the edit page" do
-			before { visit(edit_user_path(user)) }
-			it { should have_title(correct_title('Sign in')) }
-		end
-
-		describe "submitting to the update action" do
-			before { patch user_path(user) }
-			specify { expect(response).to redirect_to(signin_path) }
-		end
-
-		describe "when attempting to visit a protected page" do
-			before do
-				visit(edit_user_path(user))
-				cb_sign_in(user)
+		describe "in the Users controller" do
+			describe "visiting the edit page" do
+				before { visit(edit_user_path(user)) }
+				it { should have_title(correct_title('Sign in')) }
 			end
 
-			describe "after successfully signing in" do
-				it "should render the desired protected page" do
-					expect(page).to have_title("Update profile")
+			describe "submitting to the update action" do
+				before { patch user_path(user) }
+				specify { expect(response).to redirect_to(signin_path) }
+			end
+
+			describe "when attempting to visit a protected page" do
+				before do
+					visit(edit_user_path(user))
+					cb_sign_in(user)
+				end
+
+				describe "after successfully signing in" do
+					it "should render the desired protected page" do
+						expect(page).to have_title("Update profile")
+					end
 				end
 			end
+
+			describe "when visiting the user index" do
+				before { visit(users_path) }
+				it { should have_title("Sign in") }
+			end
 		end
 
-		describe "when visiting the user index" do
-			before { visit(users_path) }
-			it { should have_title("Sign in") }
+		describe "in the Microposts controller" do
+			describe "submitting to the create action" do
+				before { post microposts_path }
+				specify { expect(page).to redirect_to(signin_path) }
+			end
+
+			describe "submitting to the destroy action" do
+				before { delete micropost_path(FactoryGirl.create(:micropost)) }
+				specify { expect(page).to redirect_to(signin_path) }
+			end
 		end
 
 	end
